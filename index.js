@@ -1,87 +1,49 @@
-const ls = require("lightstreamer-client");
-const express = require("express");
+import Light from "./lightstreamerConnection";
 const axios = require("axios");
-const path = require("path");
+const express = require("express");
 const app = express();
+const prodURL = "https://ciapi.cityindex.com/TradingApi";
+const port = process.env.PORT;
 
-const LIGHTSTREAMER_SERVER_HOST = "https://push.cityindex.com";
-const items = ["PRICE.401155667"];
-const fields = [
-  "MarketId",
-  "TickDate",
-  "Bid",
-  "Offer",
-  "Price",
-  "High",
-  "Low",
-  "Change",
-  "Direction",
-  "Delta",
-  "ImpliedVolatility",
-  "AuditId",
-  "StatusSummary",
-];
-
-const main = async () => {
-  // store data to get data.Session
-  const { data } = await axios({
-    method: "POST",
-    url: `https://ciapi.cityindex.com/TradingApi/session`,
-    data: {
-      userName: process.env.APP_USERNAME,
-      password: process.env.APP_PASSWORD,
-      AppVersion: "1",
-      AppComments: "",
-      AppKey: process.env.APP_KEY,
-    },
-  }).catch((err) => {
-    console.log(`There was an ERROR -> ${err}`);
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
   });
 
-  // Begin LightstreamerClient()
-  var myLSClient = new ls.LightstreamerClient(
-    LIGHTSTREAMER_SERVER_HOST,
-    "STREAMINGALL"
-  );
+app.get("/", (req, res) => {
+  res.send("HII!");
+});
 
-  myLSClient.connectionDetails.setUser(process.env.APP_USERNAME);
-  myLSClient.connectionDetails.setPassword(data.Session);
+app.get("/markets/getmarketinfo", async (req, res) => {
+  try {
+    const marketReqQuery = req.headers.market.toUpperCase();
 
-  myLSClient.connect();
+    const { data } = await axios({
+      method: "POST",
+      url: `${prodURL}/session`,
+      data: {
+        userName: process.env.APP_USERNAME,
+        password: process.env.APP_PASSWORD,
+        AppVersion: "1",
+        AppComments: "",
+        AppKey: process.env.APP_KEY,
+      },
+    });
 
-  var testSubscription = new ls.Subscription("MERGE", items, fields);
-//   var testSubscription = new ls.Subscription("MERGE", ["HEADLINES.UK"], ["Story", "StoryInHtml"]);
-  testSubscription.setDataAdapter("PRICES");
-
-//   testSubscription.setDataAdapter("PRICES");
-  testSubscription.setRequestedSnapshot("yes");
-  testSubscription.setRequestedMaxFrequency(5)
-  testSubscription.setRequestedBufferSize(100)
-
-
-  myLSClient.subscribe(testSubscription);
-
-  myLSClient.addListener({
-    onStatusChange: function (newStatus) {
-      console.log(newStatus);
-
-    },
-  });
-
-  testSubscription.addListener({
-    onSubscription: function () {
-      console.log("SUBSCRIBED");
-    },
-    onUnsubscription: function () {
-      console.log("UNSUBSCRIBED");
-    },
-    onItemUpdate: function (obj) {
-      console.log(obj);
-//   console.log(testSubscription.isActive());
-    
-    },
-  });
-
-};
-
-main();
+    const marketID = await axios({
+      method: "GET",
+      url: `${prodURL}/market/searchwithtags?SearchByMarketName=TRUE`,
+      headers: {
+        username: process.env.APP_USERNAME,
+        session: data.Session,
+      },
+      params: {
+        Query: marketReqQuery,
+      },
+    });
+console.log(marketID.data.Markets.length);
+res.json('hi')
+    // Light(MARKET_ID);
+  } catch (error) {
+    console.log(error);
+  }
+});
