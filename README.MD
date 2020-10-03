@@ -1,5 +1,5 @@
 #
-# <b>Gain Capital API</b> 
+# <b>Gain Capital API with Lightstreamer</b> 
 
 ## Uses node.js and lightstreamer-client (7.2.4) to get real time market data from GainCapital
 
