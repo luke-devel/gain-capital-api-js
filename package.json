@@ -1,0 +1,17 @@
+{
+  "name": "gain-capital-api",
+  "version": "1.0.0",
+  "description": "Uses node.js and lightstreamer-client (7.2.4) to get real time market data from GainCapital",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node -r dotenv/config index.js"
+  },
+  "author": "Luke Olson",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "dotenv": "^8.2.0",
+    "lightstreamer-client": "7.2.4"
+  }
+}
