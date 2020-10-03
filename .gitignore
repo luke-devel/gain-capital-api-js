@@ -2,3 +2,5 @@
 node_modules
 notes.md
 .vscode
+yarn.lock
+package-lock.json

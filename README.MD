@@ -33,7 +33,7 @@ PORT=3333
 ```
 ## 5. Run npm install
 ```sh
-# To run the express API server (OR: yarn run express)
+# npm will install all of your dependencies for you
 $ npm install
 ```
 ## 6. Now choose a command to run the express server, or price build
@@ -43,6 +43,10 @@ $ npm run express
 # To run the command line build WITH parameter (OR: yarn run express)
 # npm run build <Query> - You can search any currency and get results
 $ npm run build usd
+# OR:
+$ npm run build eur
+# OR: 
+$ npm run build gbp/usd
 ```
 
 
