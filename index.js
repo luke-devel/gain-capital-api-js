@@ -123,7 +123,7 @@ app.get("/markets/getmarketinfo", async (req, res) => {
           Low: ${obj.getValue("Low")}\n`
         );
         response.push({
-          date: "Date.now()",
+          date: parseInt(regExp.exec(obj.getValue("TickDate"))[1]),
           market: marketID.data.Markets[updateCount].Name,
           bid: obj.getValue("Bid"),
           offer: obj.getValue("Offer"),
@@ -131,7 +131,7 @@ app.get("/markets/getmarketinfo", async (req, res) => {
           high: obj.getValue("High"),
           low: obj.getValue("Low"),
         });
-        if (response.length === 21) {
+        if (response.length === marketID.data.Markets.length) {
           res.json(response);
         }
         updateCount++;
