@@ -2,7 +2,7 @@
 # <b>Gain Capital API</b> 
 
 ## Uses node.js and lightstreamer-client (7.2.4) to get real time market data from GainCapital
-#
+
 ## <u>Usage</u>:
 ## 1. Install git --> https://git-scm.com/downloads
 ## 2. Install Node.js --> https://nodejs.org/en/download/
