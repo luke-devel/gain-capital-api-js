@@ -67,7 +67,7 @@ const main = async() =>{
     
         testSubscription.setRequestedSnapshot("yes");
         testSubscription.setRequestedMaxFrequency(50);
-        testSubscription.setRequestedBufferSize(10000);
+        testSubscription.setRequestedBufferSize(100000);
     
         myLSClient.subscribe(testSubscription);
     
