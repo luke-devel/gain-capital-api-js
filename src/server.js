@@ -34,6 +34,12 @@ app.get("/", (req, res) => {
 
 app.get("/markets/getmarketinfo", async (req, res) => {
   try {
+    if (
+      req.headers.username !== process.env.APP_USERNAME ||
+      req.headers.password !== process.env.APP_PASSWORD
+    ) {
+      throw "wrong username or password!";
+    }
     const marketReqQuery = req.headers.market.toUpperCase();
     const { data } = await axios({
       method: "POST",
@@ -128,13 +134,17 @@ app.get("/markets/getmarketinfo", async (req, res) => {
           low: obj.getValue("Low"),
           change: obj.getValue("Change"),
         });
-        if (response.length === marketID.data.Markets.length-1) {
+        if (response.length === marketID.data.Markets.length - 1) {
+          res.status(200);
           res.json(response);
+          console.log("API returned.");
         }
         updateCount++;
       },
     });
   } catch (error) {
-    console.log('error', error);
+    console.log("res.json(error)");
+    res.status(400);
+    res.json(error);
   }
 });
