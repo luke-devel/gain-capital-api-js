@@ -2,11 +2,10 @@
   "name": "gain-capital-api",
   "version": "1.0.0",
   "description": "Uses node.js and lightstreamer-client (7.2.4) to get real time market data from GainCapital",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -r dotenv/config --exec babel-node index.js",
-    "build": "node -r dotenv/config --exec babel-node index.js"
+    "express": "nodemon -r dotenv/config --exec babel-node src/server.js",
+    "build": "nodemon -r dotenv/config --exec babel-node src/prices.js"
   },
   "author": "Luke Olson",
   "license": "ISC",
