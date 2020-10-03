@@ -46,6 +46,7 @@ $ npm run build eur
 # OR: 
 $ npm run build gbp/usd
 ```
+![Output](https://i.imgur.com/5V4LCiR.png "Console Output")
 
 ## 7. To run the command line build, with argument
 ```sh
@@ -67,4 +68,3 @@ GET REQEUST TO => http://localhost:3030/markets/getmarketinfo
 ## Use Postman to see the GET request and response data
 
 ![Postman](https://i.imgur.com/KwYeLql.png "GET Request With Postman")
-
