@@ -1,15 +1,14 @@
-import Light from "./lightstreamerConnection";
+import ls from "lightstreamer-client";
 import axios from "axios";
 import express from "express";
 import moment from "moment";
 const app = express();
-const prodURL = "https://ciapi.cityindex.com/TradingApi";
 const port = process.env.PORT;
-import ls from "lightstreamer-client";
 
+const prodURL = "https://ciapi.cityindex.com/TradingApi";
 const LIGHTSTREAMER_SERVER_HOST = "https://push.cityindex.com";
 
-const fields = [
+const priceFields = [
   "MarketId",
   "TickDate",
   "Bid",
@@ -36,7 +35,6 @@ app.get("/", (req, res) => {
 app.get("/markets/getmarketinfo", async (req, res) => {
   try {
     const marketReqQuery = req.headers.market.toUpperCase();
-
     const { data } = await axios({
       method: "POST",
       url: `${prodURL}/session`,
@@ -76,11 +74,9 @@ app.get("/markets/getmarketinfo", async (req, res) => {
 
     myLSClient.connect();
 
-    var testSubscription = new ls.Subscription("MERGE", items, fields);
-    //   var testSubscription = new ls.Subscription("MERGE", ["QUOTES"], []);
+    var testSubscription = new ls.Subscription("MERGE", items, priceFields);
     testSubscription.setDataAdapter("PRICES");
 
-    //   testSubscription.setDataAdapter("PRICES");
     testSubscription.setRequestedSnapshot("yes");
     testSubscription.setRequestedMaxFrequency(50);
     testSubscription.setRequestedBufferSize(100);
@@ -114,14 +110,14 @@ app.get("/markets/getmarketinfo", async (req, res) => {
         console.log("UNSUBSCRIBED");
       },
       onItemUpdate: function (obj) {
-        console.log(
-          `${moment(parseInt(regExp.exec(obj.getValue("TickDate"))[1])).format("MMMM Do YYYY, h:mm:ss a")} | ${
-            marketID.data.Markets[updateCount].Name
-          } - Bid: ${obj.getValue("Bid")}, Offer: ${obj.getValue(
-            "Offer"
-          )}, Price: ${obj.getValue("Price")}, High: ${obj.getValue("High")},
-          Low: ${obj.getValue("Low")}\n`
-        );
+        // console.log(
+        //   `${moment(parseInt(regExp.exec(obj.getValue("TickDate"))[1])).format("MMMM Do YYYY, h:mm:ss a")} | ${
+        //     marketID.data.Markets[updateCount].Name
+        //   } - Bid: ${obj.getValue("Bid")}, Offer: ${obj.getValue(
+        //     "Offer"
+        //   )}, Price: ${obj.getValue("Price")}, High: ${obj.getValue("High")},
+        //   Low: ${obj.getValue("Low")}, Change: ${obj.getValue("Change")}%\n`
+        // );
         response.push({
           date: parseInt(regExp.exec(obj.getValue("TickDate"))[1]),
           market: marketID.data.Markets[updateCount].Name,
@@ -130,14 +126,15 @@ app.get("/markets/getmarketinfo", async (req, res) => {
           price: obj.getValue("Price"),
           high: obj.getValue("High"),
           low: obj.getValue("Low"),
+          change: obj.getValue("Change"),
         });
-        if (response.length === marketID.data.Markets.length) {
+        if (response.length === marketID.data.Markets.length-1) {
           res.json(response);
         }
         updateCount++;
       },
     });
   } catch (error) {
-    console.log(error);
+    console.log('error', error);
   }
 });
