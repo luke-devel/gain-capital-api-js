@@ -31,7 +31,12 @@ APP_PASSWORD=YourPassword
 APP_KEY=YourAppKey
 PORT=3333
 ```
-## 5. Now choose a command to run the express server, or price build
+## 5. Run npm install
+```sh
+# To run the express API server (OR: yarn run express)
+$ npm install
+```
+## 6. Now choose a command to run the express server, or price build
 ```sh
 # To run the express API server (OR: yarn run express)
 $ npm run express 
