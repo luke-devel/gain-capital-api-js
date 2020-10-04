@@ -38,7 +38,7 @@ $ npm install
 ```
 ## 6. To run the command line build, with argument
 ```sh
-# To run the command line build WITH parameter (OR: yarn run express)
+# To run the command line build WITH parameter
 # npm run build <Query> - You can search any currency and get results
 $ npm run build usd
 # OR:
@@ -48,7 +48,7 @@ $ npm run build gbp/usd
 ```
 ![Output](https://i.imgur.com/5V4LCiR.png "Console Output")
 
-## 7. To run the command line build, with argument
+## 7. To run the express API server
 ```sh
 # To run the express API server (OR: yarn run express)
 $ npm run express
