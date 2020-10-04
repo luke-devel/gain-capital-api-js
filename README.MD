@@ -29,7 +29,7 @@ $ touch .env
 APP_USERNAME=YourUsername
 APP_PASSWORD=YourPassword
 APP_KEY=YourAppKey
-PORT=3333
+PORT=3030
 ```
 ## 5. Run npm install
 ```sh
