@@ -99,33 +99,34 @@ const main = async () => {
         console.log("UNSUBSCRIBED");
       },
       onItemUpdate: function (obj) {
-        // console.log(
-        //   `${moment(parseInt(regExp.exec(obj.getValue("TickDate"))[1])).format(
-        //     "MMMM Do YYYY, h:mm:ss a"
-        //   )} | ${marketID.data.Markets[updateCount].Name} - Bid: ${obj.getValue(
-        //     "Bid"
-        //   )}, Offer: ${obj.getValue("Offer")}, Price: ${obj.getValue(
-        //     "Price"
-        //   )}, High: ${obj.getValue("High")},
-        //       Low: ${obj.getValue("Low")}, Change: ${obj.getValue("Change")}%\n`
-        // );
-        tableRows.push({
-          Date: moment(
-            parseInt(regExp.exec(obj.getValue("TickDate"))[1])
-          ).format("MMMM Do YYYY, h:mm:ss a"),
-          Market: marketID.data.Markets[updateCount].Name,
-          Bid: obj.getValue("Bid"),
-          Offer: obj.getValue("Offer"),
-          Price: obj.getValue("Price"),
-          High: obj.getValue("High"),
-          Low: obj.getValue("Low"),
-          Change: obj.getValue("Change"),
-        });
-        if (tableRows.length === marketID.data.Markets.length-1) {
-            printTable(tableRows)
-            updateCount = 0;
-        }
-        updateCount++;
+        console.log(
+          `${moment(parseInt(regExp.exec(obj.getValue("TickDate"))[1])).format(
+            "MMMM Do YYYY, h:mm:ss a"
+          )} | ${marketID.data.Markets[updateCount].Name} - Bid: ${obj.getValue(
+            "Bid"
+          )}, Offer: ${obj.getValue("Offer")}, Price: ${obj.getValue(
+            "Price"
+          )}, High: ${obj.getValue("High")},
+              Low: ${obj.getValue("Low")}, Change: ${obj.getValue("Change")}%\n`
+        );
+        // tableRows.push({
+        //   Date: moment(
+        //     parseInt(regExp.exec(obj.getValue("TickDate"))[1])
+        //   ).format("MMMM Do YYYY, h:mm:ss a"),
+        //   Market: marketID.data.Markets[updateCount].Name,
+        //   Bid: obj.getValue("Bid"),
+        //   Offer: obj.getValue("Offer"),
+        //   Price: obj.getValue("Price"),
+        //   High: obj.getValue("High"),
+        //   Low: obj.getValue("Low"),
+        //   Change: obj.getValue("Change"),
+        // });
+        // if (tableRows.length === marketID.data.Markets.length-1) {
+        //     printTable(tableRows)
+        //     updateCount = 0;
+        // }
+        // console.log('hi');
+        // updateCount++;
       },
     });
   } catch (error) {
