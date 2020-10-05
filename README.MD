@@ -13,13 +13,14 @@ $ cd gain-capital-api-js
 ```
 ## 4. Create a file named .env located in your currenty directory
 ```sh
-# The touch command creates a .env file so store environment variables
+# The touch command creates a file called .env to store environment variables
 $ touch .env
 # Open this .env file with any text editor such as vim, vscode, or notepad. Then paste in this text with your correct username, password, and app key from gaincapital. You can also choose any port number that is open.
 APP_USERNAME=YourUsername
 APP_PASSWORD=YourPassword
 APP_KEY=YourAppKey
 PORT=3030
+# Save the .env file
 ```
 ## 5. Run npm install
 ```sh
