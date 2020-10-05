@@ -6,16 +6,6 @@
 ## <u>Usage</u>:
 ## 1. Install git --> https://git-scm.com/downloads
 ## 2. Install Node.js --> https://nodejs.org/en/download/
-```sh
-# Install Node.js v14.x (change the '14' to '12' or '10' to downgrade)
-# Using Ubuntu
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo apt-get install -y nodejs
-
-# Using Debian, as root
-curl -sL https://deb.nodesource.com/setup_14.x | bash -
-apt-get install -y nodejs
-```
 ## 3. Enter a working directory then use these commands
 ```sh
 $ git clone https://github.com/luke-ols0/gain-capital-api-js.git
