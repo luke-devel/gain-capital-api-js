@@ -5,3 +5,4 @@ notes.md
 yarn.lock
 yarn-error.log
 package-lock.json
+src/Data.csv
