@@ -1,8 +1,6 @@
 import ls from "lightstreamer-client";
 import axios from "axios";
-import fs from "fs";
 import moment from "moment";
-import path from "path";
 
 const prodURL = "https://ciapi.cityindex.com/TradingApi";
 const LIGHTSTREAMER_SERVER_HOST = "https://push.cityindex.com";
@@ -153,23 +151,6 @@ const PriceStream = async (currecnyPair) => {
         //     )}, High: ${obj.getValue("High")},
         //         Low: ${obj.getValue("Low")}, Change: ${obj.getValue("Change")}%\n`
         //   );
-
-        // CSV Format is no longer needed.
-        // CSV Data Format: Date,Market,Bid,Offer,Price,High,Low,Change
-        // const data = `Date,Market,Bid,Offer,Price,High,Low,Change\n${moment(
-        //   parseInt(regExp.exec(obj.getValue("TickDate"))[1])
-        // ).format("MMMM Do YYYY h:mm:ss A")},${
-        //   marketID.data.Markets[0].Name
-        // },${obj.getValue("Bid")},${obj.getValue("Offer")},${obj.getValue(
-        //   "Price"
-        // )},${obj.getValue("High")},${obj.getValue("Low")},${obj.getValue(
-        //   "Change"
-        // )}`;
-
-        // Write to CSV file for API to look at
-        // fs.writeFile(path.resolve(__dirname, "Data.csv"), data, (err) => {
-        //   // console.log(err || "done");
-        // });
       },
     });
   } catch (error) {
