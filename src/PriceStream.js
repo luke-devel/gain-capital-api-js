@@ -7,6 +7,8 @@ import path from "path";
 const prodURL = "https://ciapi.cityindex.com/TradingApi";
 const LIGHTSTREAMER_SERVER_HOST = "https://push.cityindex.com";
 
+export let sessionID;
+
 export let currentMarketData = {
   Date: "null",
   MarketName: "null",
@@ -55,13 +57,13 @@ const PriceStream = async (currecnyPair) => {
         AppKey: process.env.APP_KEY,
       },
     });
-
+    sessionID = data.Session;
     const marketID = await axios({
       method: "GET",
       url: `${prodURL}/market/searchwithtags?SearchByMarketName=TRUE`,
       headers: {
         username: process.env.APP_USERNAME,
-        session: data.Session,
+        session: sessionID,
       },
       params: {
         Query: currecnyPair,
