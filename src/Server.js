@@ -3,16 +3,17 @@ import axios from "axios";
 import express from "express";
 const app = express();
 const port = process.env.PORT;
-import PriceStream from './PriceStream'
+import { PriceStream, currentMarketData } from "./PriceStream";
 
-PriceStream();
+// Data.csv file will now be constantly updated
+PriceStream(process.argv[2]);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 
 app.get("/", (req, res) => {
-  res.send("HII!");
+  res.send(currentMarketData.Name);
 });
 
 app.get("/markets/getmarketinfo", async (req, res) => {
@@ -23,7 +24,19 @@ app.get("/markets/getmarketinfo", async (req, res) => {
     ) {
       throw "wrong username or password!";
     }
-
+    const response = {
+      date: currentMarketData.Date,
+      market: currentMarketData.MarketName,
+      bid: currentMarketData.Bid,
+      offer: currentMarketData.Offer,
+      price: currentMarketData.Pricue,
+      high: currentMarketData.High,
+      low: currentMarketData.Low,
+      change: currentMarketData.Change,
+    };
+    res.status(200);
+    res.json(response);
+    console.log("API returned.");
   } catch (error) {
     console.log("res.json(error)");
     res.status(400);

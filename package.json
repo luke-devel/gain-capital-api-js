@@ -4,8 +4,8 @@
   "description": "Uses node.js and lightstreamer-client (7.2.4) to get real time market data from GainCapital",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "express": "nodemon -r dotenv/config --exec babel-node src/server.js",
-    "build": "nodemon -r dotenv/config --exec babel-node src/prices.js"
+    "express": "nodemon -r dotenv/config --exec babel-node src/Server.js",
+    "build": "nodemon -r dotenv/config --exec babel-node src/Prices.js"
   },
   "author": "Luke Olson",
   "license": "ISC",
