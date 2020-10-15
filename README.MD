@@ -1,7 +1,22 @@
 #
 # <b>Gain Capital API with Lightstreamer</b> 
 
+## Update: this readme isnt fully updated. To run the base app use:
+  ```sh
+// Choose any market pair after "express", it is a search query 
+// sometimes the order of the two markets matter, and will error if they are misordered
+$ npm run express gbp/usd
+OR
+$ yarn express gbp/usd
+```
+## To place a by order of the market pair chosen above (market pair must match):
+```sh
+make a POST request to http://localhost:3030/placeorder with username and password headers
+```
+![POST Example](https://i.imgur.com/Co4nIRa.png "POST Example")
+
 ## Uses node.js and lightstreamer-client (7.2.4) to get real time market data from GainCapital
+
 
 ## <u>Usage</u>:
 ## 1. Install git --> https://git-scm.com/downloads
