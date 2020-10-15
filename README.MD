@@ -1,5 +1,6 @@
 #
 # <b>Gain Capital API with Lightstreamer</b> 
+## Uses Node.js and lightstreamer-client (7.2.4) to get real time market data from GainCapital
 
 ## Update: This README isnt fully current. To run the base app use:
   ```sh
@@ -14,9 +15,6 @@ $ yarn express gbp/usd
 make a POST request to http://localhost:3030/placeorder with username and password headers
 ```
 ![POST Example](https://i.imgur.com/Co4nIRa.png "POST Example")
-
-## Uses node.js and lightstreamer-client (7.2.4) to get real time market data from GainCapital
-
 
 ## <u>Usage</u>:
 ## 1. Install git --> https://git-scm.com/downloads
